@@ -1,0 +1,33 @@
+class AppAsset {
+  static const promo1 = 'assets/images/promo1.png';
+  static const logoDbs = 'assets/images/logo_dbs.png';
+  static const logoIconDbs = 'assets/images/logo_icon_dbs.png';
+  static const ilLogin = 'assets/images/il_login.png';
+  static const logoIcon = 'assets/images/aalim_logo.png';
+  static const logoSplash = 'assets/images/aalim_splash.png';
+  static const imageProfile = 'assets/images/profile.png';
+  static const male = 'assets/images/avatar_male.png';
+  static const female = 'assets/images/avatar_female.png';
+  static const imageCategory1 = 'assets/images/category1.png';
+  static const imageCategory2 = 'assets/images/category2.png';
+  static const imageClass1 = 'assets/images/class1.png';
+  static const imageClass2 = 'assets/images/class2.png';
+  static const iconHome = 'assets/images/ic_home.svg';
+  static const iconSearch = 'assets/images/ic_search.svg';
+  static const iconSaved = 'assets/images/ic_saved.svg';
+  static const iconProfile = 'assets/images/ic_profile.svg';
+  static const iconCheckbox = 'assets/images/ic_checkbox.svg';
+  static const iconMarked = 'assets/images/ic_ribbon.png';
+  static const iconPdf = 'assets/images/ic_pdf.png';
+  static const iconImg = 'assets/images/ic_img.png';
+  static const iconDownloadFile = 'assets/images/ic_downloadfile.png';
+  static const ilPlayback = 'assets/images/il_playback.png';
+  static const ilNothing = 'assets/images/il_nothing.png';
+  static const ilOnboarding1 = 'assets/images/il_onboarding1.png';
+  static const ilEmail = 'assets/images/il_email.png';
+  static const ilOtp = 'assets/images/il_otp.png';
+  static const ilPassword = 'assets/images/il_password.png';
+  static const ilRegister = 'assets/images/il_register.png';
+  static const ilIkhwan = 'assets/images/il_ikhwan.png';
+  static const ilAkhwat = 'assets/images/il_akhwat.png';
+}
