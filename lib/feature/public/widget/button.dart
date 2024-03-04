@@ -1,23 +1,23 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dbs_care/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ButtonPrimary extends StatelessWidget {
-  const ButtonPrimary({
+  ButtonPrimary({
     Key? key,
     required this.name,
-    this.url = '',
+    required this.onTap,
   }) : super(key: key);
 
-  final String url;
   final String name;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(url);
-      },
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -32,6 +32,7 @@ class ButtonPrimary extends StatelessWidget {
       ),
     );
   }
+ 
 }
 
 

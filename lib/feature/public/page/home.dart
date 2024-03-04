@@ -80,6 +80,9 @@ class HomePage extends StatelessWidget {
                     const CardHarga(),
                     const CardHarga(),
                     const CardHarga(),
+                    Container(
+                      padding: const EdgeInsets.only(right: 20),
+                    ),
                  ],
                ),
              ),
@@ -105,9 +108,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: ButtonPrimary(name: 'Login', url: '/login',),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: ButtonPrimary(name: 'Login', onTap: () => login(),),
             ),
             Container(
               height: 50,
@@ -134,4 +137,9 @@ class HomePage extends StatelessWidget {
       )
     );
   }
+}
+
+void login() {
+  Get.toNamed('/login');
+
 }

@@ -1,6 +1,5 @@
 import 'package:dbs_care/config/theme.dart';
 import 'package:dbs_care/feature/public/widget/card_daftar_harga.dart';
-import 'package:dbs_care/feature/public/widget/card_promo.dart';
 import 'package:flutter/material.dart';
 
 class DaftarHargaPage extends StatelessWidget {
