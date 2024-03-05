@@ -7,6 +7,6 @@ class TrackingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Tracking Page');
+    return const Center(child: Text('Tracking Page, (comingsoon)'));
   }
 }

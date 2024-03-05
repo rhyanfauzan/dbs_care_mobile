@@ -7,6 +7,6 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('History Pages');
+    return const Center(child: Text('History Pages, (comingsoon)'));
   }
 }

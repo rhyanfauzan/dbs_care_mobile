@@ -4,6 +4,7 @@ import 'package:dbs_care/feature/public/page/daftar_harga.dart';
 import 'package:dbs_care/feature/public/page/promo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:online_course_app/feature/public/auth/login_page.dart';
 // import 'package:online_course_app/feature/public/auth/register_page.dart';
@@ -13,7 +14,8 @@ import 'feature/public/auth/register.dart';
 import 'feature/user/page/index.dart';
 import 'feature/public/page/home.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -47,22 +49,23 @@ class MyApp extends StatelessWidget {
         // Cek main route menuju halaman login atau index
         '/': (context) {
           // return Obx(() {
-            // if (userController.isLogin.isTrue) {
-            //   print('isLogin ${userController.isLogin.value}, Login');
-            //   return const Index();
-            // } else {
-            //   print('isLogin ${userController.isLogin.value}, Index');
-            //   Get.delete<UserController>();
-            //   return LoginPage();
-            // }
-              return const HomePage();
+          // if (userController.isLogin.isTrue) {
+          //   print('isLogin ${userController.isLogin.value}, Login');
+          //   return const Index();
+          // } else {
+          //   print('isLogin ${userController.isLogin.value}, Index');
+          //   Get.delete<UserController>();
+          //   return LoginPage();
+          // }
+          return const Index();
           // });
         },
         // '/': (context) => const OnboardingPage(),
-        '/index': (context) => const Index(),
+        // '/index': (context) => const Index(),
+        '/home': (context) => HomePage(),
         '/promo': (context) => const PromoPage(),
         '/daftarharga': (context) => const DaftarHargaPage(),
-        '/login': (context) =>  LoginPage(),
+        '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
       },
     );
