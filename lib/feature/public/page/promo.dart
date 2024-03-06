@@ -1,9 +1,14 @@
+import 'package:dbs_care/config/app_format.dart';
 import 'package:dbs_care/config/theme.dart';
+import 'package:dbs_care/feature/public/controller/promo_controller.dart';
 import 'package:dbs_care/feature/public/widget/card_promo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PromoPage extends StatelessWidget {
-  const PromoPage({super.key});
+  PromoPage({super.key});
+
+  final promoController = Get.put(PromoController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,40 +27,27 @@ class PromoPage extends StatelessWidget {
             color: whiteColor, // Set icon color to white
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 20,
+        body: Obx(() {
+          if (promoController.isLoading.isTrue) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: redColor,
               ),
-              CardPromo(
-                urlPromo: 'www.man.duniabarusa.id',
-                image: 'Ada',
-                periode: '1 Januari 2024 - 30 Januari 2024',
-              ),
-              CardPromo(
-                urlPromo: 'www.openai.com',
-                image: 'Ada',
-              ),
-              CardPromo(
-                urlPromo: 'www.google.com',
-                image: 'Ada',
-                periode: '1 Desember 2023 - 30 Desember 2023',
-              ),
-              CardPromo(
-                urlPromo: 'www.openai.me',
-                image: 'Ada',
-              ),
-              CardPromo(
-                urlPromo: 'www.openai.me',
-                image: 'Ada',
-              ),
-              CardPromo(
-                urlPromo: 'www.openai.me',
-                image: 'Ada',
-              ),
-            ],
-          ),
-        ));
+            );
+          } else {
+            return ListView.builder(
+              padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+              itemCount: promoController.promos.length,
+              itemBuilder: (context, index) {
+                return CardPromo(
+                  urlPromo: AppFormat()
+                      .removeHttps(promoController.promos[index].addressLink),
+                  image: promoController.promos[index].photo,
+                  periode: promoController.promos[index].promoPeriode,
+                );
+              },
+            );
+          }
+        }));
   }
 }

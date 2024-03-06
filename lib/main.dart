@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         // '/': (context) => const OnboardingPage(),
         '/index': (context) => const Index(),
         '/home': (context) => HomePage(),
-        '/promo': (context) => const PromoPage(),
+        '/promo': (context) => PromoPage(),
         '/daftarharga': (context) => DaftarHargaPage(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),

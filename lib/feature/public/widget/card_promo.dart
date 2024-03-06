@@ -1,9 +1,10 @@
 // ignore_for_file: must_be_immutable, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:image_network/image_network.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../config/app_asset.dart';
+import '../../../config/app_format.dart';
 import '../../../config/theme.dart';
 
 class CardPromo extends StatelessWidget {
@@ -30,8 +31,7 @@ class CardPromo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _launched = _launchInBrowser(
-            Uri(scheme: 'https', host: urlPromo));
+        _launched = _launchInBrowser(Uri(scheme: 'https', host: urlPromo));
       },
       child: Container(
         width: double.infinity,
@@ -41,7 +41,29 @@ class CardPromo extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Image.asset(AppAsset.promo1),
+            ImageNetwork(
+              image: image,
+              height: 150,
+              width: double.maxFinite,
+              duration: 1000,
+              curve: Curves.easeIn,
+              onPointer: true,
+              debugPrint: false,
+              fullScreen: true,
+              fitAndroidIos: BoxFit.cover,
+              fitWeb: BoxFitWeb.cover,
+              onLoading: CircularProgressIndicator(
+                color: greyColor,
+              ),
+              onError: Icon(
+                Icons.error,
+                color: redColor,
+              ),
+              onTap: () {
+                _launched = _launchInBrowser(Uri(
+                    scheme: 'https', host: AppFormat().removeHttps(urlPromo)));
+              },
+            ),
             Positioned(
               bottom: 0,
               right: 0,
