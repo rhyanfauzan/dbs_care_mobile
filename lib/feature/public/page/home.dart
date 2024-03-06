@@ -215,6 +215,47 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20,),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20),
+                              child: Text(
+                                'Sekilas Tentang DBS Care Mobile',
+                                textAlign: TextAlign.center,
+                                style: blackTextStyle.copyWith(
+                                    color: redColor,
+                                    fontWeight: semiBold,
+                                    fontSize: 14),
+                              ),
+                            ),
+                            const SizedBox(height: 10,),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20),
+                              child: Text(
+                                'DBS Care Mobile adalah sebuah aplikasi yang memberikan informasi seputar layanan / service mobil Toyota, info harga terbaru, pemberitahuan promo menarik, dan fitur lainnya.',
+                                textAlign: TextAlign.center,
+                                style: blackTextStyle.copyWith(
+                                    fontWeight: regular, fontSize: 12),
+                              ),
+                            ),
+                            const SizedBox(height: 20,),
+
+                          ],
+                        ),
+                      ),
+                    ),
                     if (token.isEmpty || token == '')
                       Column(
                         children: [
