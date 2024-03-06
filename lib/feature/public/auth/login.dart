@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'dart:convert';
 import 'package:dbs_care/feature/public/controller/auth_controller.dart';
@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../config/app_asset.dart';
 import '../../../config/theme.dart';
+import '../../../core/domain/api_url.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -99,13 +100,13 @@ class LoginPage extends StatelessWidget {
               Container(
                 height: 5,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ButtonSecondary(
                   name: 'Register',
-                  url: '/register',
+                  onTap: () => register(),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -131,9 +132,10 @@ class LoginPage extends StatelessWidget {
 
     // Make POST request to login API
     final response = await http.post(
-      Uri.parse('https://dbs.careersinformation.org/api/login'),
+      Uri.parse('$baseUrl/login'),
       body: {'no_hp': noHp, 'password': password},
     );
+    print(response);
     final jsonResponse = json.decode(response.body);
 // Parse response JSON
     final bool isSuccess = jsonResponse['isSuccess'];
@@ -162,7 +164,7 @@ class LoginPage extends StatelessWidget {
         GetStorage().write('hpNo', hpNo);
         GetStorage().write('tglLahir', tglLahir);
         GetStorage().write('photo', photo);
-        Get.offAllNamed('/');
+        Get.offAllNamed('/index');
       } else {
         // Login failed
         ScaffoldMessenger.of(context).showSnackBar(

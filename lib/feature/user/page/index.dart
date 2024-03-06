@@ -7,12 +7,10 @@ import 'package:dbs_care/feature/user/page/Tracking/tracking.dart';
 import 'package:dbs_care/feature/user/page/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../config/app_asset.dart';
 import '../../../config/theme.dart';
-import '../controller/user_controller.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -23,7 +21,6 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> {
   _IndexState();
-  final UserController userController = Get.put(UserController());
 
   int _currentPage = 0;
   final _pageController = PageController();
@@ -33,13 +30,7 @@ class _IndexState extends State<Index> {
 
   @override
   Widget build(BuildContext context) {
-    print(userController.isLogin);
-    return Obx(() {
-      // ignore: unrelated_type_equality_checks
-      if (userController.isLogin == false) {
-        return HomePage();
-      } else {
-        return Scaffold(
+    return Scaffold(
           body: PageView(
             controller: _pageController,
             children:  [
@@ -104,8 +95,6 @@ class _IndexState extends State<Index> {
             ],
           ),
         );
-      }
-    });
   }
 }
 

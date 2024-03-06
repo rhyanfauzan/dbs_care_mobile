@@ -2,7 +2,10 @@ import 'package:dbs_care/config/theme.dart';
 import 'package:flutter/material.dart';
 
 class CardHarga extends StatelessWidget {
-  const CardHarga({super.key});
+  const CardHarga({super.key, this.model = '', this.harga = ''});
+
+  final String model;
+  final String harga;
 
   @override
   Widget build(BuildContext context) {
@@ -10,15 +13,21 @@ class CardHarga extends StatelessWidget {
       width: 150,
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(5)
-      ),
+          color: whiteColor, borderRadius: BorderRadius.circular(5)),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Column(
         children: [
-          Text('Avanza 1.5', style: blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),),
-          Container(height: 4,),
-          Text('Rp. 235.000.000', style: greyTextStyle.copyWith(fontWeight: light, fontSize: 11),)
+          Text(
+           model,
+            style: blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
+          ),
+          Container(
+            height: 4,
+          ),
+          Text(
+           harga,
+            style: greyTextStyle.copyWith(fontWeight: light, fontSize: 11),
+          )
         ],
       ),
     );

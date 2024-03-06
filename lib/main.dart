@@ -11,19 +11,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'config/theme.dart';
 import 'feature/public/auth/login.dart';
 import 'feature/public/auth/register.dart';
+import 'feature/user/controller/user_controller.dart';
 import 'feature/user/page/index.dart';
 import 'feature/public/page/home.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
   // Getx Controller
-  // final UserController userController =
-  //     Get.put(UserController(), permanent: false);
+  final UserController userController =
+      Get.put(UserController(), permanent: false);
 
   @override
   Widget build(BuildContext context) {
@@ -48,23 +49,22 @@ class MyApp extends StatelessWidget {
       routes: {
         // Cek main route menuju halaman login atau index
         '/': (context) {
-          // return Obx(() {
-          // if (userController.isLogin.isTrue) {
-          //   print('isLogin ${userController.isLogin.value}, Login');
-          //   return const Index();
-          // } else {
-          //   print('isLogin ${userController.isLogin.value}, Index');
-          //   Get.delete<UserController>();
-          //   return LoginPage();
-          // }
-          return const Index();
-          // });
+          return Obx(() {
+            if (userController.isLogin.isTrue) {
+              print('isLogin ${userController.isLogin.value}, Login');
+              return const Index();
+            } else {
+              print('isLogin ${userController.isLogin.value}, Index');
+              Get.delete<UserController>();
+              return HomePage();
+            }
+          });
         },
         // '/': (context) => const OnboardingPage(),
-        // '/index': (context) => const Index(),
+        '/index': (context) => const Index(),
         '/home': (context) => HomePage(),
         '/promo': (context) => const PromoPage(),
-        '/daftarharga': (context) => const DaftarHargaPage(),
+        '/daftarharga': (context) => DaftarHargaPage(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
       },

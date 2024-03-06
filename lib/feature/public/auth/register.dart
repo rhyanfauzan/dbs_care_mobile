@@ -92,7 +92,8 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child: NumericField(controller: _nikController, hintText: 'NIK'),
+                child:
+                    NumericField(controller: _nikController, hintText: 'NIK'),
               ),
               Container(height: 15),
               ImageUploadField(controller: imageController),
@@ -101,7 +102,7 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ButtonPrimary(
                   name: 'Register',
-                  onTap: () => Register(
+                  onTap: () => register(
                       imageController,
                       _nameController,
                       _noHpController,
@@ -112,11 +113,11 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               Container(height: 5),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ButtonSecondary(
                   name: 'Login',
-                  url: '/login',
+                  onTap: () => login(),
                 ),
               ),
             ],
@@ -127,7 +128,7 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-void Register(
+void register(
     ImageUploadController imageController,
     TextEditingController nameController,
     TextEditingController noHpController,
@@ -144,6 +145,6 @@ void Register(
   print(nikController.text);
 }
 
-void Login() {
+void login() {
   Get.toNamed('/login');
 }

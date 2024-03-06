@@ -1,9 +1,15 @@
 import 'package:dbs_care/config/theme.dart';
 import 'package:dbs_care/feature/public/widget/card_daftar_harga.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../config/app_format.dart';
+import '../controller/model_controller.dart';
 
 class DaftarHargaPage extends StatelessWidget {
-  const DaftarHargaPage({super.key});
+  DaftarHargaPage({super.key});
+
+  final modelController = Get.put(ModelController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +28,29 @@ class DaftarHargaPage extends StatelessWidget {
             color: whiteColor, // Set icon color to white
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                Container(
-                  height: 20,
-                ),
-                const CardDaftarHarga(name: 'Veloz 1.5 A/T', price: 'Rp. 255.000.000'),
-                const CardDaftarHarga(name: 'Avanza 1.5 A/T', price: 'Rp. 235.000.000'),
-                const CardDaftarHarga(name: 'Innova 2.5 G M/T', price: 'Rp. 515.000.000'),
-                const CardDaftarHarga(name: 'Velfire 2.5 A/T', price: 'Rp. 935.000.000'),
-              ],
-            ),
-          ),
-        ));
+        body: GetBuilder<ModelController>(
+            init: modelController,
+            builder: (hc) {
+              return Obx(() {
+                if (hc.isLoading.isTrue) {
+                  return Center(
+                      child: CircularProgressIndicator(
+                    color: redColor,
+                  ));
+                } else {
+                  return ListView.builder(
+                    padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+                    itemCount: hc.models.length,
+                    itemBuilder: (context, index) {
+                      // Build each list item based on the data in the controller
+                      return CardDaftarHarga(
+                        name: hc.models[index].type ?? '',
+                        price: AppFormat.currency(hc.models[index].price ?? ''),
+                      );
+                    },
+                  );
+                }
+              });
+            }));
   }
 }

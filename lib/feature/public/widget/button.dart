@@ -2,7 +2,6 @@
 
 import 'package:dbs_care/config/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ButtonPrimary extends StatelessWidget {
   ButtonPrimary({
@@ -32,26 +31,22 @@ class ButtonPrimary extends StatelessWidget {
       ),
     );
   }
- 
 }
 
-
 class ButtonSecondary extends StatelessWidget {
-  const ButtonSecondary({
+  ButtonSecondary({
     Key? key,
     required this.name,
-    this.url = '',
+    required this.onTap,
   }) : super(key: key);
 
-  final String url;
+  void Function()? onTap;
   final String name;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(url);
-      },
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
