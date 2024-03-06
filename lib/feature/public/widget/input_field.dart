@@ -156,28 +156,36 @@ class DisplayField extends StatelessWidget {
   const DisplayField({
     Key? key,
     this.hintText = '',
+    this.label = '',
   }) : super(key: key);
 
   final String hintText;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: TextField(
-        enabled: false,
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          hintText: hintText,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          border: InputBorder.none,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),),
+        Container(
+          margin: const EdgeInsets.only(bottom: 10, top: 5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: TextField(
+            enabled: false,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              hintText: hintText,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              border: InputBorder.none,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
