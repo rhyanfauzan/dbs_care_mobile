@@ -22,17 +22,25 @@ class AppFormat {
   }
 
   String removeHttps(String url) {
-  // Parse the URL string
-  Uri uri = Uri.parse(url);
+    // Parse the URL string
+    Uri uri = Uri.parse(url);
 
-  // Check if the scheme is 'https' and remove it
-  if (uri.scheme == 'https') {
-    return uri.host; // Return only the host part of the URL
+    // Check if the scheme is 'https' and remove it
+    if (uri.scheme == 'https') {
+      return uri.host; // Return only the host part of the URL
+    }
+
+    // If the scheme is not 'https', return the original URL
+    return url;
   }
 
-  // If the scheme is not 'https', return the original URL
-  return url;
-}
-}
+  String convertDateFormat(String dateString) {
+    // Parse the date string into a DateTime object
+    DateTime dateTime = DateFormat('dd-MM-yyyy').parse(dateString);
 
+    // Format the DateTime object into the desired format
+    String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
 
+    return formattedDate;
+  }
+}

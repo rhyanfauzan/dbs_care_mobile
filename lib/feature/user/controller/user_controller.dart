@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:dbs_care/core/domain/api_url.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +24,7 @@ class UserController extends GetxController {
     if (token != null) {
       try {
         final response = await http.get(
-          Uri.parse('https://dbs.careersinformation.org/api/checkAuth'),
+          Uri.parse('$baseUrl/checkAuth'),
           headers: {
             'accept': '*/*',
             'Authorization': 'Bearer $token',

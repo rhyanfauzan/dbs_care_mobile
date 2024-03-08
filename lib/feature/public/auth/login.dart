@@ -86,7 +86,12 @@ class LoginPage extends StatelessWidget {
               ),
               Obx(() {
                 if (authController.isLoading.value) {
-                  return const CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: CircularProgressIndicator(
+                      color: redColor,
+                    ),
+                  );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -154,7 +159,10 @@ class LoginPage extends StatelessWidget {
         // Navigate to home screen or perform other actions
         // You can pass user data and token to the home screen if needed
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
+          SnackBar(
+            content: Text(message),
+            backgroundColor: greenColor,
+          ),
         );
         // Save token to local storage
         GetStorage().write('token', token);
@@ -174,7 +182,13 @@ class LoginPage extends StatelessWidget {
     } else {
       // Server error
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Failed ($message)')),
+        SnackBar(
+          content: Text(
+            'Login Failed ($message)',
+            style: whiteTextStyle,
+          ),
+          backgroundColor: redColor,
+        ),
       );
     }
     authController.isLoading.value = false;

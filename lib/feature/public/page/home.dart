@@ -101,10 +101,29 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: Text(
-                        'Promo berlangsung :',
-                        style: blackTextStyle.copyWith(
-                            fontWeight: semiBold, fontSize: 14),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Promo Terbaru',
+                            style: blackTextStyle.copyWith(
+                                fontWeight: semiBold, fontSize: 14),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/promo');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text(
+                                'Lihat Semua',
+                                style: blackTextStyle.copyWith(
+                                    fontWeight: regular, fontSize: 13),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -148,41 +167,43 @@ class HomePage extends StatelessWidget {
                         }
                       }),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/promo');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Text(
-                          'Lihat semua promo',
-                          style: blackTextStyle.copyWith(
-                              fontWeight: regular,
-                              color: blueColor,
-                              fontSize: 13),
-                        ),
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       height: 10,
-                      color: whiteColor,
                       margin: const EdgeInsets.symmetric(vertical: 10),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: Text(
-                        'Harga Terkini :',
-                        style: blackTextStyle.copyWith(
-                            fontWeight: semiBold, fontSize: 14),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Harga Terkini',
+                            style: blackTextStyle.copyWith(
+                                fontWeight: semiBold, fontSize: 14),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/daftarharga');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text(
+                                'Lihat Semua',
+                                style: blackTextStyle.copyWith(
+                                    fontWeight: regular, fontSize: 13),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: SizedBox(
-                        height: 70,
+                        height: 100,
                         child: Obx(() {
                           return ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -193,27 +214,16 @@ class HomePage extends StatelessWidget {
                                 model: hc.models[index].model,
                                 harga:
                                     AppFormat.currency(hc.models[index].price),
+                                diskon: AppFormat.currency(
+                                    hc.models[index].discount),
                               );
                             },
                           );
                         }),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/daftarharga');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Text(
-                          'Lihat semua daftar harga',
-                          style: blackTextStyle.copyWith(
-                              fontWeight: regular,
-                              color: blueColor,
-                              fontSize: 13),
-                        ),
-                      ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -226,10 +236,12 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5)),
                         child: Column(
                           children: [
-                            const SizedBox(height: 20,),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               child: Text(
                                 'Sekilas Tentang DBS Care Mobile',
                                 textAlign: TextAlign.center,
@@ -239,10 +251,12 @@ class HomePage extends StatelessWidget {
                                     fontSize: 14),
                               ),
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               child: Text(
                                 'DBS Care Mobile adalah sebuah aplikasi yang memberikan informasi seputar layanan / service mobil Toyota, info harga terbaru, pemberitahuan promo menarik, dan fitur lainnya.',
                                 textAlign: TextAlign.center,
@@ -250,8 +264,9 @@ class HomePage extends StatelessWidget {
                                     fontWeight: regular, fontSize: 12),
                               ),
                             ),
-                            const SizedBox(height: 20,),
-
+                            const SizedBox(
+                              height: 20,
+                            ),
                           ],
                         ),
                       ),
@@ -283,7 +298,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     Container(
-                      height: 250,
+                      height: 70,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),

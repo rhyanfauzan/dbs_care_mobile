@@ -46,6 +46,7 @@ class DaftarHargaPage extends StatelessWidget {
                       return CardDaftarHarga(
                         name: hc.models[index].type ?? '',
                         price: AppFormat.currency(hc.models[index].price ?? ''),
+                        discount: AppFormat.currency(hc.models[index].discount ?? ''),
                       );
                     },
                   );

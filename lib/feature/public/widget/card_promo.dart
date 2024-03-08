@@ -65,19 +65,18 @@ class CardPromo extends StatelessWidget {
               },
             ),
             Positioned(
-              bottom: 0,
-              right: 0,
+              top: 10,
+              right: 10,
               child: Container(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                     color: redColor,
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(15))),
+                    borderRadius: const BorderRadius.all(Radius.circular(15))),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     periode,
-                    style: whiteTextStyle.copyWith(fontSize: 11),
+                    style: whiteTextStyle.copyWith(fontSize: 11, fontWeight: medium),
                   ),
                 ),
               ),

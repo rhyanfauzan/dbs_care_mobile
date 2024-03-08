@@ -91,11 +91,9 @@ class ProfilePage extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
-              child: SizedBox(
-            height: 10,
-            width: double.infinity,
-          )),
+          Container(
+            height: 50,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Obx(() {

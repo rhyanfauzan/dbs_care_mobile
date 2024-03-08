@@ -1,10 +1,16 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names
+// ignore_for_file: avoid_print, non_constant_identifier_names, use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dbs_care/config/app_format.dart';
 import 'package:dbs_care/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:http/http.dart' as http;
 import '../../../config/app_asset.dart';
+import '../../../core/domain/api_url.dart';
+import '../controller/auth_controller.dart';
 import '../widget/button.dart';
 import '../widget/image_upload.dart';
 import '../widget/input_field.dart';
@@ -12,18 +18,11 @@ import '../widget/input_field.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _noHpController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _alamatController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _nikController = TextEditingController();
+  final authController = Get.put(AuthController());
+  final ImageUploadController imageController = ImageUploadController();
 
   @override
   Widget build(BuildContext context) {
-    final ImageUploadController imageController =
-        Get.put(ImageUploadController());
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -62,56 +61,90 @@ class RegisterPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   child: InputField(
-                      controller: _nameController, hintText: 'Nama Lengkap')),
+                      controller: authController.nameController,
+                      hintText: 'Nama Lengkap')),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: NumericField(
-                    controller: _noHpController, hintText: 'Nomor Handphone'),
+                    controller: authController.noHpController,
+                    hintText: 'Nomor Handphone'),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: PasswordField(
-                    controller: _passwordController, hintText: 'Password'),
+                    controller: authController.passwordController,
+                    hintText: 'Password'),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: InputField(
-                    controller: _alamatController, hintText: 'Alamat'),
+                    controller: authController.alamatController,
+                    hintText: 'Alamat'),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: DateField(
-                  controller: _dateController,
+                  controller: authController.dateController,
                   hintText: 'Tanggal Lahir',
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child:
-                    NumericField(controller: _nikController, hintText: 'NIK'),
+                child: NumericField(
+                    controller: authController.nikController, hintText: 'NIK'),
               ),
               Container(height: 15),
               ImageUploadField(controller: imageController),
               Container(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ButtonPrimary(
-                  name: 'Register',
-                  onTap: () => register(
-                      imageController,
-                      _nameController,
-                      _noHpController,
-                      _passwordController,
-                      _alamatController,
-                      _dateController,
-                      _nikController),
-                ),
-              ),
+              Obx(() {
+                if (authController.isLoading.value) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: CircularProgressIndicator(
+                      color: redColor,
+                    ),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ButtonPrimary(
+                        name: 'Register',
+                        onTap: () {
+                          if (authController.nameController.text.isNotEmpty &&
+                              authController.noHpController.text.isNotEmpty &&
+                              authController
+                                  .passwordController.text.isNotEmpty &&
+                              authController.nikController.text.isNotEmpty &&
+                              authController.dateController.text.isNotEmpty &&
+                              imageController.image != null) {
+                            authController.isLoading.value = true;
+                            register(
+                              context: context,
+                              name: authController.nameController.text,
+                              phoneNumber: authController.noHpController.text,
+                              password: authController.passwordController.text,
+                              nik: authController.nikController.text,
+                              dateOfBirth: AppFormat().convertDateFormat(
+                                  authController.dateController.text),
+                              imageFile: imageController.image!,
+                            );
+                          } else {
+                            authController.isLoading.value = false;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Semua data harus diisi termasuk gambar!')),
+                            );
+                          }
+                        }),
+                  );
+                }
+              }),
               Container(height: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -126,25 +159,82 @@ class RegisterPage extends StatelessWidget {
       ),
     );
   }
-}
 
-void register(
-    ImageUploadController imageController,
-    TextEditingController nameController,
-    TextEditingController noHpController,
-    TextEditingController passwordController,
-    TextEditingController alamatController,
-    TextEditingController dateContoller,
-    TextEditingController nikController) {
-  print(imageController.image);
-  print(nameController.text);
-  print(noHpController.text);
-  print(passwordController.text);
-  print(alamatController.text);
-  print(dateContoller.text);
-  print(nikController.text);
-}
+  Future<void> register({
+    required BuildContext context,
+    required String name,
+    required String phoneNumber,
+    required String password,
+    required String nik,
+    required String dateOfBirth,
+    required File imageFile,
+  }) async {
+    try {
+      // Create a multipart request
+      var request =
+          http.MultipartRequest('POST', Uri.parse('$baseUrl/register'));
 
-void login() {
-  Get.toNamed('/login');
+      print('dateOfBirth $dateOfBirth');
+
+      // Add form fields
+      request.fields['nama'] = name;
+      request.fields['no_hp'] = phoneNumber;
+      request.fields['password'] = password;
+      request.fields['password_confirmation'] = password;
+      request.fields['no_ktp'] = nik;
+      request.fields['tgl_lahir'] = dateOfBirth;
+
+      print("request.fields['tgl_lahir'] : ${request.fields['tgl_lahir']}");
+
+      // Add image file
+      var stream = http.ByteStream(imageFile.openRead());
+      var length = await imageFile.length();
+      var multipartFile = http.MultipartFile('photo', stream, length,
+          filename: imageFile.path.split('/').last);
+      request.files.add(multipartFile);
+
+      // Send the request
+      var response = await http.Response.fromStream(await request.send());
+      Map<String, dynamic> responseJson = jsonDecode(response.body);
+      // Parse the JSON response
+      print('response : $response');
+      print('response statusCode : ${response.statusCode}');
+
+      // Check the response status code
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Registration successful
+        print('Response : ${response.body}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Registration Successful',
+              style: blackTextStyle,
+            ),
+            backgroundColor: greenColor,
+          ),
+        );
+        Get.offAllNamed('/login');
+      } else {
+        // Registration failed
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Registration failed ${responseJson['message']}',
+              style: whiteTextStyle,
+            ),
+            backgroundColor: redColor,
+          ),
+        );
+        print('Registration failed: ${response.body}');
+      }
+    } catch (e) {
+      // Error occurred during registration
+      print('Error registering user: $e');
+    }
+    authController.isLoading.value = false;
+  }
+
+  void login() {
+    Get.toNamed('/login');
+  }
 }

@@ -2,6 +2,8 @@ class AppAsset {
   static const promo1 = 'assets/images/promo1.png';
   static const logoDbs = 'assets/images/logo_dbs.png';
   static const logoIconDbs = 'assets/images/logo_icon_dbs.png';
+  static const logoToyota = 'assets/images/toyota.png';
+  static const icCar = 'assets/images/ic_car.png';
   static const ilLogin = 'assets/images/il_login.png';
   static const logoIcon = 'assets/images/aalim_logo.png';
   static const logoSplash = 'assets/images/aalim_splash.png';

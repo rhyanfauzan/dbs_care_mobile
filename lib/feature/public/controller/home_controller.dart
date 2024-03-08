@@ -25,7 +25,7 @@ class HomeController extends GetxController {
       final response = await http.get(
         Uri.parse('$baseUrl/home'),
         headers: {
-          'accept': 'application/json',
+          'Accept': 'application/json',
           'X-CSRF-TOKEN': '',
         },
       );
