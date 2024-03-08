@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 
 class CardHarga extends StatelessWidget {
   const CardHarga(
-      {super.key, this.model = '', this.harga = '', this.diskon = ''});
+      {super.key,
+      this.model = '',
+      this.type = '',
+      this.harga = '',
+      this.diskon = ''});
 
   final String model;
+  final String type;
   final String harga;
   final String diskon;
 
@@ -21,45 +26,48 @@ class CardHarga extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            height: 2,
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 AppAsset.logoToyota,
-                width: 24,
+                width: 20,
               ),
               Container(
                 width: 6,
               ),
-              Expanded(
-                child: Text(
-                  model,
-                  style:
-                      blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
+              Text(
+                model,
+                style:
+                    blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ],
           ),
           Container(
-            height: 6,
+            height: 8,
           ),
           Text(
             harga,
-            style: blackTextStyle.copyWith(fontWeight: light, fontSize: 13),
+            style: blackTextStyle.copyWith(fontWeight: light, fontSize: 12),
           ),
-          Container(
-            height: 2,
+          Text(
+            'Diskon! $diskon',
+            style: blackTextStyle.copyWith(fontWeight: light, fontSize: 11, color: redColor),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-            decoration: BoxDecoration(
-                color: redColor, borderRadius: BorderRadius.circular(5)),
-            child: Text(
-              'Diskon $diskon',
-              style: whiteTextStyle.copyWith(fontWeight: regular, fontSize: 11),
-            ),
-          )
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+          //   decoration: BoxDecoration(
+          //       color: redColor, borderRadius: BorderRadius.circular(5)),
+          //   child: Text(
+          //     'Diskon $diskon',
+          //     style: whiteTextStyle.copyWith(fontWeight: regular, fontSize: 11),
+          //   ),
+          // )
         ],
       ),
     );

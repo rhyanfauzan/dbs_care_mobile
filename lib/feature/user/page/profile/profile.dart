@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, use_key_in_widget_constructors, avoid_print
+// ignore_for_file: use_build_context_synchronously, use_key_in_widget_constructors, avoid_print, unnecessary_null_comparison
 
 import 'package:dbs_care/config/app_format.dart';
 import 'package:dbs_care/config/theme.dart';
@@ -25,20 +25,8 @@ class ProfilePage extends StatelessWidget {
             decoration: BoxDecoration(
                 color: redColor,
                 borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10))),
-            child: Center(
-                child: Text(
-              'Profile',
-              style:
-                  whiteTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
-            )),
-          ),
-          Container(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30))),
             child: Column(
               children: [
                 ImageNetwork(
@@ -61,16 +49,32 @@ class ProfilePage extends StatelessWidget {
                     color: redColor,
                   ),
                 ),
+                Center(
+                    child: Text(
+                  // profileController.nama,
+                  'Nama',
+                  style: whiteTextStyle.copyWith(
+                      fontSize: 18, fontWeight: semiBold),
+                )),
+                Container(
+                  height: 10,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
                 Container(
                   height: 20,
                 ),
                 DisplayField(
                   label: 'Customer ID',
                   hintText: profileController.custId,
-                ),
-                DisplayField(
-                  label: 'Nama',
-                  hintText: profileController.nama,
                 ),
                 DisplayField(
                   label: 'Nomor Handphone',
@@ -80,11 +84,19 @@ class ProfilePage extends StatelessWidget {
                   label: 'NIK',
                   hintText: profileController.ktpNo,
                 ),
-                DisplayField(
-                  label: 'Tanggal Lahir',
-                  hintText: AppFormat.date(profileController.tglLahir),
-                ),
-                //  DisplayField(hintText: 'Alamat :',),
+                if (profileController.tglLahir != '')
+                  DisplayField(
+                    label: 'Tanggal Lahir',
+                    hintText: AppFormat.date(profileController.tglLahir),
+                  )
+                else
+                  const DisplayField(
+                    label: 'Tanggal Lahir',
+                    hintText: 'Belum diset.',
+                  ),
+                // const DisplayField(
+                //   hintText: 'Alamat :',
+                // ),
                 Container(
                   height: 20,
                 ),

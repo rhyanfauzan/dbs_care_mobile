@@ -45,6 +45,7 @@ class DaftarHargaPage extends StatelessWidget {
                       // Build each list item based on the data in the controller
                       return CardDaftarHarga(
                         name: hc.models[index].type ?? '',
+                        model: hc.models[index].model ?? '-',
                         price: AppFormat.currency(hc.models[index].price ?? ''),
                         discount: AppFormat.currency(hc.models[index].discount ?? ''),
                       );

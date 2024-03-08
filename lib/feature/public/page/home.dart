@@ -203,7 +203,7 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: SizedBox(
-                        height: 100,
+                        height: 95,
                         child: Obx(() {
                           return ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -212,6 +212,7 @@ class HomePage extends StatelessWidget {
                               // Build each list item based on the data in the controller
                               return CardHarga(
                                 model: hc.models[index].model,
+                                type: hc.models[index].type,
                                 harga:
                                     AppFormat.currency(hc.models[index].price),
                                 diskon: AppFormat.currency(

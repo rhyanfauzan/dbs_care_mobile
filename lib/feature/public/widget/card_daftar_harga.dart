@@ -6,11 +6,13 @@ class CardDaftarHarga extends StatelessWidget {
   const CardDaftarHarga({
     super.key,
     required this.name,
+    required this.model,
     required this.price,
     this.discount = '',
   });
 
   final String name;
+  final String model;
   final String price;
   final String discount;
 
@@ -18,7 +20,7 @@ class CardDaftarHarga extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 5),
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
           color: whiteColor, borderRadius: BorderRadius.circular(5)),
@@ -31,7 +33,7 @@ class CardDaftarHarga extends StatelessWidget {
             ),
             child: Image.asset(
               AppAsset.icCar,
-              width: 27,
+              width: 80,
             ),
           ),
           Container(
@@ -41,37 +43,43 @@ class CardDaftarHarga extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style:
-                      blackTextStyle.copyWith(fontWeight: bold, fontSize: 12),
-                  overflow: TextOverflow.visible,
-                  maxLines: 1,
-                ),
-                Container(
-                  height: 2,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      price,
+                      name,
                       style: blackTextStyle.copyWith(
-                          fontWeight: medium, fontSize: 12),
+                          fontWeight: bold, fontSize: 13),
+                      overflow: TextOverflow.visible,
+                      maxLines: 1,
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 2),
+                          horizontal: 10, vertical: 3),
                       decoration: BoxDecoration(
-                          color: redColor,
+                          color: darkBackgroundColor,
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
-                        'Diskon $discount',
+                        model,
                         style: whiteTextStyle.copyWith(
                             fontWeight: light, fontSize: 11),
                       ),
                     )
                   ],
+                ),
+                    Container(
+                      height: 4,
+                    ),
+                Text(
+                  'Harga: $price',
+                  style:
+                      blackTextStyle.copyWith(fontWeight: regular, fontSize: 12),
+                ),
+                Text(
+                  'Diskon! $discount',
+                  style:
+                      blackTextStyle.copyWith(fontWeight: medium, fontSize: 12, color: redColor),
                 ),
                 Container(
                   height: 4,

@@ -98,6 +98,7 @@ class LoginPage extends StatelessWidget {
                     child: ButtonPrimary(
                       name: 'Login',
                       onTap: () => _login(context),
+                      // onTap: ()=> loginForce(),
                     ),
                   );
                 }
@@ -196,5 +197,9 @@ class LoginPage extends StatelessWidget {
 
   void register() {
     Get.toNamed('/register');
+  }
+
+  void loginForce() {
+    Get.toNamed('/index');
   }
 }
